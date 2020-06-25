@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LR2SoundGUI"
         mc:Ignorable="d"
-        Title="MainWindow" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Margin="0" SizeToContent="WidthAndHeight">
+        Title="LR2 Sound GUI" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Margin="0" SizeToContent="WidthAndHeight" Loaded="MainWindow_Load" Unloaded="MainWindow_Unload">
     <Grid UseLayoutRounding="False" Margin="0,0,10,10">
         <Label Content="Music directory:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
         <TextBox x:Name="MusicDirectoryTextBox" HorizontalAlignment="Left" Height="26" Margin="109,10,0,0" TextWrapping="Wrap" Text="Choose music directory..." VerticalAlignment="Top" Width="593" IsReadOnly="True" Background="#FFE6E6E6" />
@@ -20,7 +20,7 @@
                 <GridView>
                     <GridViewColumn Width="Auto" Header="Filename" DisplayMemberBinding="{Binding Filename}" />
                     <GridViewColumn Width="Auto" Header="Song title" DisplayMemberBinding="{Binding Title}" />
-                    <!--<GridViewColumn Header="World and track" DisplayMemberBinding="{Binding WorldTrack}"/>-->
+                    <!--<GridViewColumn Header="World and track" DisplayMemberBinding="{Binding WorldTrack}" />-->
                 </GridView>
             </ListView.View>
         </ListView>
