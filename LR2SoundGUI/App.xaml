@@ -4,5 +4,10 @@
              xmlns:local="clr-namespace:LR2SoundGUI"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style TargetType="Border" x:Key="SectionSeparator">
+            <Setter Property="BorderThickness" Value="0,1,0,0"/>
+            <Setter Property="BorderBrush" Value="Silver"/>
+            <Setter Property="Margin" Value="0,10"/>
+        </Style>
     </Application.Resources>
 </Application>

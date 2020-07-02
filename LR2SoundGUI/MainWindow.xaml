@@ -5,46 +5,84 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LR2SoundGUI"
         mc:Ignorable="d"
-        Title="LR2 Sound GUI" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Margin="0" SizeToContent="WidthAndHeight" Loaded="MainWindow_Load" Unloaded="MainWindow_Unload">
-    <Grid UseLayoutRounding="False" Margin="0,0,10,10">
-        <Label Content="Music directory:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
-        <TextBox x:Name="MusicDirectoryTextBox" HorizontalAlignment="Left" Height="26" Margin="109,10,0,0" TextWrapping="Wrap" Text="Choose music directory..." VerticalAlignment="Top" Width="593" IsReadOnly="True" Background="#FFE6E6E6" />
-        <Button x:Name="ChooseDirectoryButton" Click="ChooseDirectoryButton_Click" Content="Choose.." HorizontalAlignment="Left" Margin="707,10,0,0" VerticalAlignment="Top" Width="75" Height="26" BorderBrush="#FF707070" ToolTip="Choose your game music directory" />
-        <Label Content="New music pack:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-        <Separator HorizontalAlignment="Left" Height="29" Margin="10,41,0,0" VerticalAlignment="Top" Width="772" />
-        <Button x:Name="ChooseZIPPackButton" Content="ZIP" HorizontalAlignment="Left" Margin="455,70,0,0" VerticalAlignment="Top" Width="35" Height="26" Click="ChooseZIPPackButton_Click" ToolTip="Choose ZIP archive" />
-        <Label x:Name="PackNameLabel" Content="no music pack chosen" HorizontalAlignment="Left" Margin="113,70,0,0" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="297" FontWeight="Bold" />
-        <Label Content="Contents of new music pack:" HorizontalAlignment="Left" Margin="10,101,0,0" VerticalAlignment="Top" />
-        <ListView x:Name="PackContentsListView" HorizontalAlignment="Left" Height="278" Margin="10,132,0,0" VerticalAlignment="Top" Width="480">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="Auto" Header="Filename" DisplayMemberBinding="{Binding Filename}" />
-                    <GridViewColumn Width="Auto" Header="Song title" DisplayMemberBinding="{Binding Title}" />
-                    <!--<GridViewColumn Header="World and track" DisplayMemberBinding="{Binding WorldTrack}" />-->
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="SwitchPackButton" Content="Switch!" HorizontalAlignment="Left" Margin="415,101,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="SwitchPackButton_Click" ToolTip="Switch current music pack to new music pack" />
-        <Separator HorizontalAlignment="Left" Height="29" Margin="332,218,0,0" VerticalAlignment="Top" Width="354" RenderTransformOrigin="0.5,0.5">
-            <Separator.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform />
-                    <SkewTransform />
-                    <RotateTransform Angle="90" />
-                    <TranslateTransform />
-                </TransformGroup>
-            </Separator.RenderTransform>
-        </Separator>
-        <Label Content="Back up current music pack:" HorizontalAlignment="Left" Margin="530,70,0,0" VerticalAlignment="Top" />
-        <RadioButton x:Name="FolderBackupBtn" GroupName="BackupType" Content="to folder" HorizontalAlignment="Left" Margin="550,96,0,0" VerticalAlignment="Top" IsChecked="True" />
-        <RadioButton x:Name="ZipBackupBtn" GroupName="BackupType" Content="to .zip file" HorizontalAlignment="Left" Margin="550,119,0,0" VerticalAlignment="Top" />
-        <Button x:Name="BackupButton" Content="Back up!" HorizontalAlignment="Left" Margin="537,150,0,0" VerticalAlignment="Top" Width="235" Height="26" Click="BackupButton_Click" ToolTip="This will back up only the songs that LR2 actually uses. Unused songs (which may be present) will not be backed up." />
-        <Label Content="Choose zip compression level:" HorizontalAlignment="Left" Margin="530,210,0,0" VerticalAlignment="Top" />
-        <Separator HorizontalAlignment="Left" Height="29" Margin="530,181,0,0" VerticalAlignment="Top" Width="252" />
-        <RadioButton x:Name="NormalComprBtn" GroupName="CompressionLevel" Content="Normal" HorizontalAlignment="Left" Margin="550,236,0,0" VerticalAlignment="Top" IsChecked="True" />
-        <RadioButton x:Name="FastestComprBtn" GroupName="CompressionLevel" Content="Fastest" HorizontalAlignment="Left" Margin="550,259,0,0" VerticalAlignment="Top" />
-        <RadioButton x:Name="BestComprBtn" GroupName="CompressionLevel" Content="Best" HorizontalAlignment="Left" Margin="550,282,0,0" VerticalAlignment="Top" />
-        <Button x:Name="ChooseFolderPackButton" Content="F" HorizontalAlignment="Left" Margin="415,70,0,0" VerticalAlignment="Top" Width="35" Height="26" Click="ChooseFolderPackButton_Click" ToolTip="Choose folder" />
-        <ProgressBar HorizontalAlignment="Left" Height="25" Margin="537,385,0,0" VerticalAlignment="Top" Width="235" Opacity="0.5" />
+        Title="LR2SoundGUI" SizeToContent="WidthAndHeight" MinWidth="500" MinHeight="340">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Name="SetupGrid">
+            <!-- Upper window area with directory setup and new pack selection -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="5" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <!-- Begin first row controls -->
+            <Label Content="Music directory:" />
+            <TextBox Grid.Column="1" Name="DirectoryTextbox" IsReadOnly="True" Margin="5,0" Background="#E5E5E5" VerticalContentAlignment="Center" />
+            <Button Grid.Column="2" Grid.ColumnSpan="2" Name="SetDirectoryBtn" Padding="5,0">Select...</Button>
+            <!-- Begin second row controls -->
+            <Label Grid.Row="2" Content="New music pack name:" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Name="NewPackNameTextBlock" Margin="5,0" FontWeight="Bold" TextTrimming="CharacterEllipsis" VerticalAlignment="Center">no music pack chosen</TextBlock>
+            <Button Grid.Row="2" Grid.Column="2" Name="FolderPackBtn" Padding="5,0">folder</Button>
+            <Button Grid.Row="2" Grid.Column="3" Name="ZipPackBtn" Margin="5,0,0,0" Padding="5,0">zip</Button>
+        </Grid>
+        <!-- End upper window area -->
+        <!-- Separator line between upper and lower window area-->
+        <Border Grid.Row="1" Style="{StaticResource SectionSeparator}" />
+        <!-- Grid for left panel, vertical separator line and right panel-->
+        <Grid Grid.Row="2" Name="BottomGrid" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <!-- Grid for left side with pack contents -->
+            <Grid Name="ContentsGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label>Contents of new music pack:</Label>
+                <Button Grid.Column="1" Name="SwitchPackBtn" Margin="5,0,0,0" Padding="5,0">Switch!</Button>
+                <ListView Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,0,0" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.View>
+                        <!-- GridView for displaying tracks in soundpack and their titles-->
+                        <GridView>
+                            <GridViewColumn Header="Filename" DisplayMemberBinding="{Binding Filename}" Width="Auto" />
+                            <GridViewColumn Header="Song title" DisplayMemberBinding="{Binding SongTitle}" Width="Auto" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Border Grid.Column="1" BorderBrush="Silver" BorderThickness="1,0,0,0" Margin="10,0" />
+            <StackPanel Grid.Column="2">
+                <Label Content="Back up current music pack:" />
+                <RadioButton GroupName="BackupType" IsChecked="True" Margin="10,0,0,0">to folder</RadioButton>
+                <RadioButton GroupName="BackupType" Margin="10,5,0,0">to .zip file</RadioButton>
+                <Button Name="BackupBtn" Margin="5,5" Padding="0,2">Backup now!</Button>
+                <Border Style="{StaticResource SectionSeparator}" />
+                <!-- Separator between backup type and compression level -->
+                <Label Content="Select ZIP compression level:" />
+                <RadioButton GroupName="CompressionLevel" Margin="10,0,0,0">fastest</RadioButton>
+                <RadioButton GroupName="CompressionLevel" IsChecked="True" Margin="10,5,0,0">normal</RadioButton>
+                <RadioButton GroupName="CompressionLevel" Margin="10,5,0,0">best</RadioButton>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
