@@ -5,11 +5,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("LR2 Sound GUI")]
-[assembly: AssemblyDescription("LR2 Soundpack Changer, GUI version – WPF.")]
+[assembly: AssemblyTitle("LR2 Soundpack Switcher")]
+[assembly: AssemblyDescription("LR2 Soundpack Switcher, GUI version – WPF.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LR2 Sound GUI")]
+[assembly: AssemblyProduct("LR2 Soundpack Switcher")]
 [assembly: AssemblyCopyright("Copyright © 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

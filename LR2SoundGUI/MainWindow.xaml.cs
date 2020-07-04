@@ -21,5 +21,30 @@ namespace LR2SoundGUI
         {
             InitializeComponent();
         }
+
+        private void SetDirectoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void FolderPackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ZipPackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SwitchPackBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BackupBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

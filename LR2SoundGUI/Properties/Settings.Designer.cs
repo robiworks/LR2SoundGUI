@@ -26,12 +26,12 @@ namespace LR2SoundGUI.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string MusicPath {
+        public string Directory {
             get {
-                return ((string)(this["MusicPath"]));
+                return ((string)(this["Directory"]));
             }
             set {
-                this["MusicPath"] = value;
+                this["Directory"] = value;
             }
         }
     }
